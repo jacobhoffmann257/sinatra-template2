@@ -1,5 +1,10 @@
 <h1><%= @title %></h1>
-<ul>
 
-</ul>
 <p><%= @description %></p>
+<ul><% @author.each do |x| %>
+<% y = x.fetch("author") %>
+<% y.each do |z| %> 
+<li><% y.fetch("key").to_s  %></li>
+<% end %>
+<% end %>
+</ul>

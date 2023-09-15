@@ -16,12 +16,19 @@ get("/search") do
   erb(:search)
 end
 post("/bookresult") do
-isbn = params.fetch("isbn")
-libraryurl = "https://openlibrary.org/works/#{isbn}.json"
+olnum = params.fetch("isbn")
+libraryurl = "https://openlibrary.org/works/#{olnum}.json"
 rawresponse = HTTP.get(libraryurl)
 parsedresponse = JSON.parse(rawresponse)
 @title = parsedresponse.fetch("title")
 @author = parsedresponse.fetch("authors")
+@author.each do |x|
+  y= x.fetch("author")
+  y.each do |z|
+  puts z[0].class
+  puts z
+  end
+end
 @description = parsedresponse.fetch("description")
 @places = parsedresponse.fetch("subject_places")
 @subjects = parsedresponse.fetch("subjects")
@@ -30,6 +37,6 @@ parsedresponse = JSON.parse(rawresponse)
 @location = parsedresponse.fetch("location")
 @created = parsedresponse.fetch("created")
 stuff = @author[0]
-puts stuff
+puts @author[0]
 erb(:bookresult)
 end
