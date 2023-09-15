@@ -33,6 +33,7 @@ olraw = HTTP.get(olurl)
 olparsed = JSON.parse(olraw)
 @title = olparsed.fetch("title")
 @description = olparsed.fetch("description")
+#trying spilting the description if the is something like east of eden
 authors = olparsed.fetch("authors")
 authorhash = authors[0]
 authorloc = authorhash.fetch("author")
