@@ -39,7 +39,9 @@ authorkey = authorloc.fetch("key")
 authorurl = "https://openlibrary.org#{authorkey}.json"
 authorraw = HTTP.get(authorurl)
 authorparsed = JSON.parse(authorraw)
-puts authorparsed
-puts authorparsed.class
+authorbio = authorparsed.fetch("bio")
+authorname = authorparsed.fetch("personal_name")
+puts authorname
+#puts authordoc.class
 erb(:bookresult)
 end
