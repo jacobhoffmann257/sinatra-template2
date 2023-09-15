@@ -16,25 +16,30 @@ get("/search") do
   erb(:search)
 end
 post("/bookresult") do
-isbn = params.fetch("isbn")
-isbnurl = "https://openlibrary.org/isbn/#{isbn}.json"
-isbnraw = HTTP.get(isbnurl)
-isbnparsed = JSON.parse(isbnraw)
-#olnum = params.fetch("ol")
-#libraryurl = "https://openlibrary.org/books/#{olnum}.json"
-#rawresponse = HTTP.get(libraryurl)
-#parsedresponse = JSON.parse(rawresponse)
-#@title = parsedresponse.fetch("title")
-#@author = parsedresponse.fetch("authors")
-#puts parsedresponse
-#@description = parsedresponse.fetch("description")
-#@places = parsedresponse.fetch("subject_places")
-#@subjects = parsedresponse.fetch("subjects")
-#@people = parsedresponse.fetch("subject_people")
-#@times = parsedresponse.fetch("subject_times")
-#@location = parsedresponse.fetch("location")
-#@created = parsedresponse.fetch("created")
-#stuff = @author[0]
-#puts @author[0]
-#erb(:bookresult)
+rawtitle = params.fetch("isbn")
+thetitle = rawtitle.gsub(" ", "+")
+thetitleurl = "https://openlibrary.org/search.json?title=#{thetitle}"
+thetitleraw = HTTP.get(thetitleurl)
+thetitleparsed = JSON.parse(thetitleraw)
+docs = thetitleparsed.fetch("docs")
+titledocs = docs[0]
+olkey = titledocs.fetch("key")
+#https://openlibrary.org/works/OL45804W.json
+olurl = "https://openlibrary.org#{olkey}.json"
+olraw = HTTP.get(olurl)
+olparsed = JSON.parse(olraw)
+title = olparsed.fetch("title")
+description = olparsed.fetch("description")
+authors = olparsed.fetch("authors")
+authorhash = authors[0]
+authorloc = authorhash.fetch("author")
+authorkey = authorloc.fetch("key")
+#typeloc = authorhash.fetch("type")
+#lockey = typeloc.fetch("key")
+authorurl = "https://openlibrary.org#{authorkey}.json"
+authorraw = HTTP.get(authorurl)
+authorparsed = JSON.parse(authorraw)
+puts authorparsed
+puts authorparsed.class
+erb(:bookresult)
 end
