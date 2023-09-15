@@ -29,7 +29,7 @@ parsedresponse = JSON.parse(rawresponse)
 @times = parsedresponse.fetch("subject_times")
 @location = parsedresponse.fetch("location")
 @created = parsedresponse.fetch("created")
-
-puts @places
+stuff = @author[0]
+puts stuff
 erb(:bookresult)
 end
