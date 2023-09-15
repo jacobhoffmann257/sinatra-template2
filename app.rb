@@ -21,6 +21,9 @@ thetitle = rawtitle.gsub(" ", "+")
 thetitleurl = "https://openlibrary.org/search.json?title=#{thetitle}"
 thetitleraw = HTTP.get(thetitleurl)
 thetitleparsed = JSON.parse(thetitleraw)
+numFound = thetitleparsed.fetch("numFound")
+pp numFound
+if(thetitleparsed.fetch("numFound") >= 1)
 docs = thetitleparsed.fetch("docs")
 titledocs = docs[0]
 olkey = titledocs.fetch("key")
@@ -28,8 +31,8 @@ olkey = titledocs.fetch("key")
 olurl = "https://openlibrary.org#{olkey}.json"
 olraw = HTTP.get(olurl)
 olparsed = JSON.parse(olraw)
-title = olparsed.fetch("title")
-description = olparsed.fetch("description")
+@title = olparsed.fetch("title")
+@description = olparsed.fetch("description")
 authors = olparsed.fetch("authors")
 authorhash = authors[0]
 authorloc = authorhash.fetch("author")
@@ -38,10 +41,22 @@ authorkey = authorloc.fetch("key")
 #lockey = typeloc.fetch("key")
 authorurl = "https://openlibrary.org#{authorkey}.json"
 authorraw = HTTP.get(authorurl)
+
 authorparsed = JSON.parse(authorraw)
-authorbio = authorparsed.fetch("bio")
+#pp authorparsed
+if(authorparsed.has_key?("doc"))
+@authorbio = authorparsed.fetch("doc")
+else
+@authorbio = "No bio found"
+end
 authorname = authorparsed.fetch("personal_name")
-puts authorname
+splited = authorname.split(",")
+@firstname = splited[1]
+@lastname = splited[0]
 #puts authordoc.class
 erb(:bookresult)
+  
+else
+  erb(:failure)
+end
 end
