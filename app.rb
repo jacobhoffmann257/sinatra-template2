@@ -32,29 +32,29 @@ olurl = "https://openlibrary.org#{olkey}.json"
 olraw = HTTP.get(olurl)
 olparsed = JSON.parse(olraw)
 @title = olparsed.fetch("title")
+if (olparsed.has_key?("description"))
 @description = olparsed.fetch("description")
+else
+  @description = "Couldn't find a description for that book"
+end
 #trying spilting the description if the is something like east of eden
 authors = olparsed.fetch("authors")
 authorhash = authors[0]
 authorloc = authorhash.fetch("author")
 authorkey = authorloc.fetch("key")
-#typeloc = authorhash.fetch("type")
-#lockey = typeloc.fetch("key")
 authorurl = "https://openlibrary.org#{authorkey}.json"
 authorraw = HTTP.get(authorurl)
 
 authorparsed = JSON.parse(authorraw)
-#pp authorparsed
 if(authorparsed.has_key?("doc"))
 @authorbio = authorparsed.fetch("doc")
 else
-@authorbio = "No bio found"
+@authorbio = "This author doesn't have a bio here"
 end
 authorname = authorparsed.fetch("personal_name")
 splited = authorname.split(",")
 @firstname = splited[1]
 @lastname = splited[0]
-#puts authordoc.class
 erb(:bookresult)
   
 else
