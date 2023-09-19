@@ -1,0 +1,46 @@
+*{
+  box-sizing: border-box;
+  background-color: cadetblue;
+}
+table{
+  border: ridge 5px;
+  color: gold;  
+}
+p{
+  color: darkslategray;
+  border: 2px solid brown;
+  background-color: antiquewhite;
+  height: 300px;
+  width: 500px;
+  padding: 25px;
+}
+h2{
+  border: 5px solid goldenrod;
+  background-color: moccasin;
+  height: 75px;
+  width: 500px;
+  padding: 25px;
+
+}
+h1{
+  background-color: maroon;
+  color: gold;
+  width: 200px;
+  height: 50px;
+  padding: 50px;
+}
+form{
+  border: 5px ridge red;
+  background-color: antiquewhite;
+  height: 250px;
+  width: 750px;
+  padding: 50px;
+
+}
+.author{
+  border: 5px solid goldenrod;
+  background-color: khaki;
+  height: 75px;
+  width: 500px;
+  padding: 25px;
+  }
