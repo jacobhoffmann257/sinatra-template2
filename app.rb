@@ -17,6 +17,8 @@ get("/search") do
 end
 post("/bookresult") do
 rawtitle = params.fetch("isbn")
+if(rawtitle != nil?)
+  puts rawtitle
 thetitle = rawtitle.gsub(" ", "+")
 thetitleurl = "https://openlibrary.org/search.json?title=#{thetitle}"
 thetitleraw = HTTP.get(thetitleurl)
@@ -57,6 +59,10 @@ splited = authorname.split(",")
 @lastname = splited[0]
 erb(:bookresult)
   
+else
+  erb(:failure)
+end
+
 else
   erb(:failure)
 end

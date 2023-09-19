@@ -1,9 +1,7 @@
-*{
-  box-sizing: border-box;
-  background-color: cadetblue;
-}
+
 table{
   border: ridge 5px;
+  background-color: blanchedalmond;
   color: gold;  
 }
 p{
@@ -29,7 +27,8 @@ h1{
   height: 50px;
   padding: 50px;
 }
-form{
+
+.searchbar{
   border: 5px ridge red;
   background-color: antiquewhite;
   height: 250px;
@@ -44,3 +43,13 @@ form{
   width: 500px;
   padding: 25px;
   }
+  .result{
+    
+  }
+  #center{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    flex-direction: column;
+  }
+
