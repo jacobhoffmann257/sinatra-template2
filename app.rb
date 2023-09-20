@@ -17,7 +17,7 @@ get("/search") do
 end
 post("/bookresult") do
 rawtitle = params.fetch("isbn")
-if(rawtitle != nil?)
+if(rawtitle.class == String)
   puts rawtitle
 thetitle = rawtitle.gsub(" ", "+")
 thetitleurl = "https://openlibrary.org/search.json?title=#{thetitle}"
